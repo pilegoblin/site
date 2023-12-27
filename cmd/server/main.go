@@ -2,9 +2,11 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 	"math/rand"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -33,7 +35,11 @@ func main() {
 	r.Handle("/public/*", http.StripPrefix("/public/", publicFileServer))
 
 	//turn that server on
-	http.ListenAndServe(":3000", r)
+	port, ok := os.LookupEnv("PORT")
+	if !ok {
+		port = "8080"
+	}
+	http.ListenAndServe(fmt.Sprintf(":%s", port), r)
 }
 
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
