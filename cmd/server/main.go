@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
 	"math/rand"
 	"net/http"
@@ -39,7 +38,7 @@ func main() {
 	if !ok {
 		port = "8080"
 	}
-	http.ListenAndServe(fmt.Sprintf(":%s", port), r)
+	http.ListenAndServe(":"+port, r)
 }
 
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
