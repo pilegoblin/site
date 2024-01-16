@@ -4,6 +4,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
     <link rel="icon" href="/public/favicon.svg" type="image/svg" />
     <link href="/static/output.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,27 +20,33 @@
     <title>{{template "title" .}}</title>
   </head>
 
-  <body class="bg-neutral-900 text-neutral-300 ">
+  <body class="bg-neutral-900 text-neutral-300">
     <div class="min-h-screen mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col">
       <!-- header -->
       <div
         class="px-6 lg:px-8 flex flex-row pt-4 justify-between text-neutral-600"
+        hx-boost="true"
       >
         <a href="/" class="hover:underline">home</a>
         <div class="flex justify-evenly space-x-4">
-          <a href="mailto:andrew.boram@hotmail.com" class="hover:underline"
+          <a href="/projects" class="hover:underline">projects</a>
+          <a href="/blog" class="hover:underline">blog</a>
+          <a
+            hx-boost="false"
+            href="mailto:andrew.boram@hotmail.com"
+            class="hover:underline"
             >contact</a
           >
-          <a href="/public/resume.pdf" class="hover:underline">resume</a>
+          <a hx-boost="false" href="/public/resume.pdf" class="hover:underline"
+            >resume</a
+          >
         </div>
       </div>
       <!-- content -->
       {{template "content" .}}
       <!-- footer -->
-      <footer
-        class="mt-auto flex justify-center items-end text-neutral-600"
-      >
-        <div class="mb-2 flex justify-center w-full space-x-4">
+      <footer class="mt-auto flex justify-center items-end text-neutral-600">
+        <div class="mb-4 flex justify-center w-full space-x-4">
           <a
             href="https://github.com/crims1n"
             target="_blank"
