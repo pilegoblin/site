@@ -18,15 +18,15 @@ const (
 )
 
 func main() {
-	// boilerplate
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	// index route, greeting page
 	r.Get("/", HandleIndex)
-	// temp page at the moment
+
 	r.Get("/projects", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplate(w, r, "templates/pages/projects.html", nil)
 	})
+
 	r.Get("/blog", func(w http.ResponseWriter, r *http.Request) {
 		RenderTemplate(w, r, "templates/pages/blog.html", nil)
 	})
@@ -37,13 +37,14 @@ func main() {
 		http.StripPrefix("/static/", fs).ServeHTTP(w, r)
 	})
 
-	publicFileServer := http.FileServer(http.Dir("./public/"))
-	r.Handle("/public/*", http.StripPrefix("/public/", publicFileServer))
+	fs := http.FileServer(http.Dir("./public/"))
+	r.Handle("/public/*", http.StripPrefix("/public/", fs))
 
 	port, ok := os.LookupEnv("PORT")
 	if !ok {
 		port = "8080"
 	}
+
 	log.Println("Server starting...")
 	http.ListenAndServe(":"+port, r)
 }
@@ -52,6 +53,7 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	//pick a random greeting
 	greetings := []string{"Howdy", "Hey", "Hi"}
 	greeting := greetings[rand.Intn(len(greetings))]
+
 	RenderTemplate(w, r, "templates/pages/index.html", struct{ Greeting string }{Greeting: greeting})
 }
 
@@ -60,7 +62,6 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, filename string, dat
 	template := template.Must(template.ParseFiles(filename, BASE_TEMPLATE))
 	var buf bytes.Buffer
 	if err := template.ExecuteTemplate(&buf, "base", data); err != nil {
-		//todo: throw up a 504 page here or something
 		return
 	}
 
