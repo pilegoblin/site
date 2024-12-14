@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -49,12 +50,25 @@ func main() {
 	http.ListenAndServe(":"+port, r)
 }
 
+type indexArgs struct {
+	Greeting string
+	Age      int
+}
+
 func HandleIndex(w http.ResponseWriter, r *http.Request) {
-	//pick a random greeting
+	// pick a random greeting
 	greetings := []string{"Howdy", "Hey", "Hi"}
 	greeting := greetings[rand.Intn(len(greetings))]
 
-	RenderTemplate(w, r, "templates/pages/index.html", struct{ Greeting string }{Greeting: greeting})
+	// find my age
+	now := time.Now().Unix()
+	birth := time.Date(1998, 9, 9, 0, 0, 0, 0, time.Now().Local().Location()).Unix()
+	age := (now - birth) / (60 * 60 * 24 * 365)
+
+	// args
+	args := indexArgs{Greeting: greeting, Age: int(age)}
+
+	RenderTemplate(w, r, "templates/pages/index.html", args)
 }
 
 // helper function to render the template for any page
