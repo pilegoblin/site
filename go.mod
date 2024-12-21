@@ -1,4 +1,4 @@
-module personal
+module github.com/pilegoblin/site
 
 go 1.21.4
 
