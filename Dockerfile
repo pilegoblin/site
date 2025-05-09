@@ -1,9 +1,3 @@
-FROM node:latest as css
-WORKDIR /app
-COPY templates/ ./templates/
-COPY tailwind.config.js .
-RUN npx tailwindcss -i ./templates/main.css -o ./dist/output.css --minify
-
 FROM golang:latest
 WORKDIR /app
 
@@ -11,8 +5,11 @@ COPY cmd/ ./cmd/
 COPY go.mod .
 COPY go.sum .
 COPY public/ ./public/
-COPY --from=css /app/dist/output.css /app/dist/output.css 
-COPY --from=css /app/templates/ /app/templates/
+COPY templates/ ./templates/
+RUN mkdir -p ./bin
+RUN wget https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 -O ./bin/tailwind
+RUN chmod +x ./bin/tailwind
+RUN /app/bin/tailwind -i ./templates/main.css -o ./dist/output.css --minify
 
 ENV PORT=8080
 EXPOSE ${PORT}
