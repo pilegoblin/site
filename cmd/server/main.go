@@ -28,10 +28,6 @@ func main() {
 		RenderTemplate(w, r, "templates/pages/projects.html", nil)
 	})
 
-	r.Get("/blog", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplate(w, r, "templates/pages/blog.html", nil)
-	})
-
 	r.Get("/static/*", func(w http.ResponseWriter, r *http.Request) {
 		fs := http.FileServer(http.Dir("./dist/"))
 		w.Header().Add("Cache-Control", "no-cache")
