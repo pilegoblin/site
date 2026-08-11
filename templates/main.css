@@ -25,6 +25,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* always reserve the scrollbar's width so short pages don't shift the
+       centred container sideways when the scrollbar disappears */
+    scrollbar-gutter: stable;
   }
 
   :focus-visible {
