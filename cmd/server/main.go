@@ -7,6 +7,8 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"path/filepath"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -16,6 +18,11 @@ import (
 const (
 	BASE_TEMPLATE = "templates/base.html"
 )
+
+// available to every template, so pages that render with nil data can use them too
+var templateFuncs = template.FuncMap{
+	"year": func() int { return time.Now().Year() },
+}
 
 func main() {
 	r := chi.NewRouter()
@@ -62,9 +69,11 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 
 // helper function to render the template for any page
 func RenderTemplate(w http.ResponseWriter, r *http.Request, filename string, data any) {
-	template := template.Must(template.ParseFiles(filename, BASE_TEMPLATE))
+	tmpl := template.Must(
+		template.New(filepath.Base(BASE_TEMPLATE)).Funcs(templateFuncs).ParseFiles(filename, BASE_TEMPLATE),
+	)
 	var buf bytes.Buffer
-	if err := template.ExecuteTemplate(&buf, "base", data); err != nil {
+	if err := tmpl.ExecuteTemplate(&buf, "base", data); err != nil {
 		return
 	}
 

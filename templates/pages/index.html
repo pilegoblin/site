@@ -1,44 +1,65 @@
 {{define "title"}}Drew Boram{{end}} {{define "content"}}
-<div class="py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="max-w-2xl lg:mx-0">
-      <h2 class="mt-2 text-4xl font-bold tracking-tight sm:text-6xl">
-        {{.Greeting}}! I'm Drew.
-      </h2>
-      <p class="mt-6 text-lg leading-8">
-        A software engineer who loves building scalable, robust applications. Go is my tool of choice, but architecture
-        and design is what actually matters.
-      </p>
-    </div>
-  </div>
 
-  <div class="text-right flex justify-end mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="max-w-2xl lg:mx-0">
-      <h2 class="mt-2 text-4xl font-bold tracking-tight sm:text-6xl">
-        My Toolkit
-      </h2>
-      <p class="mt-6 text-lg leading-8">
-        Go, TypeScript, Python, Postgres, Linux, Docker, Git, AWS, Claude, Gemini
-      </p>
-    </div>
-  </div>
-
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="max-w-2xl lg:mx-0">
-      <h2 class="mt-2 text-4xl font-bold tracking-tight sm:text-6xl">
-        About Me
-      </h2>
-      <p class="mt-6 text-lg leading-8">
-        I'm a backend engineer at heart, though in practice I end up working across the whole stack.
-        <br><br>
-        AI tools are woven into how I work now. They take care of the repetitive parts so I can spend more time on the
-        harder questions: system design, tradeoffs, the stuff that still needs a human to reason about it. I believe the
-        best engineers today use AI to accelerate their workflow, not replace their fundamentals.
-        <br><br>
-        Check out my work and feel free to reach out.
-      </p>
-    </div>
-  </div>
+<div class="border-b border-border pt-16 pb-12 sm:pt-24 sm:pb-[72px]">
+  <h1 class="mb-6 font-mono text-[clamp(40px,6vw,64px)] font-bold leading-[1.05] tracking-[-0.02em] text-text">
+    {{.Greeting}}! I'm Drew.<span
+      class="ml-1 inline-block w-[0.5ch] animate-blink bg-accent motion-reduce:animate-none">&nbsp;</span>
+  </h1>
+  <p class="text-lg text-text-dim">
+    A software engineer who loves building scalable, robust applications. Go is my tool of choice, but architecture
+    and design is what actually matters.
+  </p>
 </div>
+
+<section class="border-b border-border py-16">
+  <div class="mb-3.5 font-mono text-xs uppercase tracking-[0.12em] text-accent-dim before:text-text-faint before:content-['//_']">
+    stack
+  </div>
+  <h2 class="mb-6 font-mono text-[32px] font-bold tracking-[-0.01em] text-text">My Toolkit</h2>
+  <div class="flex flex-wrap gap-2.5 font-mono text-[13px]">
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Go</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">TypeScript</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Python</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Postgres</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Linux</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Docker</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Git</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">AWS</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Claude</span>
+    <span
+      class="rounded-[3px] border border-border bg-bg-raised px-3.5 py-2 text-text-dim transition-colors hover:border-accent-dim hover:text-accent">Gemini</span>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="mb-3.5 font-mono text-xs uppercase tracking-[0.12em] text-accent-dim before:text-text-faint before:content-['//_']">
+    background
+  </div>
+  <h2 class="mb-6 font-mono text-[32px] font-bold tracking-[-0.01em] text-text">About Me</h2>
+  <div class="space-y-4 text-base text-text-dim">
+    <p>
+      I'm a <strong class="font-medium text-text">backend engineer at heart</strong>, though in practice I end up
+      working across the whole stack.
+    </p>
+    <p>
+      AI tools are woven into how I work now. They take care of the repetitive parts so I can spend more time on the
+      harder questions: system design, tradeoffs, the stuff that still needs a human to reason about it. I believe the
+      best engineers today use AI to <strong class="font-medium text-text">accelerate their workflow, not replace their
+        fundamentals</strong>.
+    </p>
+    <p>
+      Check out my work and feel free to reach out.
+    </p>
+  </div>
+</section>
 
 {{end}}

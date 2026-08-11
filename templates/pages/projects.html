@@ -1,45 +1,41 @@
 {{define "title"}}Projects{{end}} {{define "content"}}
 
-<div class="py-24 sm:py-32 max-w-7xl px-6 lg:px-8 text-lg">
-  <div class="relative my-4">
-    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-      <div class="w-full border-t border-neutral-600"></div>
-    </div>
-    <div class="relative flex justify-start">
-      <span class="bg-neutral-900 pr-3 text-base leading-6 text-neutral-600">Personal</span>
-    </div>
+<section class="border-b border-border py-16">
+  <div class="mb-3.5 font-mono text-xs uppercase tracking-[0.12em] text-accent-dim before:text-text-faint before:content-['//_']">
+    Personal
   </div>
-  <div class="lg:mx-0 my-4">
-    <h2 class="font-bold tracking-tight">Website (drewboram.com)</h2>
-    <p class="text-neutral-400 italic">
-      You are here! Made with Go, Tailwind, and HTMX.
-    </p>
-  </div>
-  <div class="lg:mx-0 my-4">
-    <a class="font-bold tracking-tight hover:underline" href="https://github.com/pilegoblin/garbanzo"
-      target="_blank">Garbanzo</a>
-    <p class="text-neutral-400 italic">
-      A Discord clone I'm working on in my free time.
-    </p>
-  </div>
-  <!-- divider -->
-  <div class="relative">
-    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-      <div class="w-full border-t border-neutral-600"></div>
+  <div class="space-y-6">
+    <div>
+      <h2 class="font-mono text-base font-semibold text-text">Website (drewboram.com)</h2>
+      <p class="mt-1 text-text-dim">
+        You are here! Made with Go, Tailwind, and HTMX.
+      </p>
     </div>
-    <div class="relative flex justify-start">
-      <span class="bg-neutral-900 pr-3 text-base leading-6 text-neutral-600">Academic</span>
+    <div>
+      <a class="font-mono text-base font-semibold text-text transition-colors hover:text-accent"
+        href="https://github.com/pilegoblin/garbanzo" target="_blank" rel="noopener">Garbanzo</a>
+      <p class="mt-1 text-text-dim">
+        A Discord clone I'm working on in my free time.
+      </p>
     </div>
   </div>
-  <!-- divider -->
-  <div class="lg:mx-0 my-4">
-    <a class="font-bold tracking-tight hover:underline" href="https://github.com/pilegoblin/mtg-senior-research"
-      target="_blank">Senior Research Project</a>
-    <p class="text-neutral-400 italic">
+</section>
+
+<section class="py-16">
+  <div class="mb-3.5 font-mono text-xs uppercase tracking-[0.12em] text-accent-dim before:text-text-faint before:content-['//_']">
+    Academic
+  </div>
+  <div>
+    <a class="font-mono text-base font-semibold text-text transition-colors hover:text-accent"
+      href="https://github.com/pilegoblin/mtg-senior-research" target="_blank" rel="noopener">Senior Research
+      Project</a>
+    <p class="mt-1 text-text-dim">
       My capstone project for my Computer Science degree. Made with Python,
       Tensorflow,
-      <a class="underline" href="https://github.com/pilegoblin/color-picker" target="_blank">and a bit of Go</a>.
+      <a class="text-accent-dim underline underline-offset-2 transition-colors hover:text-accent"
+        href="https://github.com/pilegoblin/color-picker" target="_blank" rel="noopener">and a bit of Go</a>.
     </p>
   </div>
-</div>
+</section>
+
 {{end}}
