@@ -16,12 +16,28 @@ import (
 )
 
 const (
-	BASE_TEMPLATE = "templates/base.html"
+	BaseTemplate = "templates/base.html"
+	IndexPage    = "templates/pages/index.html"
+	ProjectsPage = "templates/pages/projects.html"
 )
 
 // available to every template, so pages that render with nil data can use them too
 var templateFuncs = template.FuncMap{
 	"year": func() int { return time.Now().Year() },
+}
+
+// every page is parsed once at startup instead of on each request, which used
+// to re-read and re-parse both files from disk for every hit. each page gets
+// its own template set because they all define their own title/content blocks.
+var templates = map[string]*template.Template{
+	IndexPage:    parsePage(IndexPage),
+	ProjectsPage: parsePage(ProjectsPage),
+}
+
+func parsePage(filename string) *template.Template {
+	return template.Must(
+		template.New(filepath.Base(BaseTemplate)).Funcs(templateFuncs).ParseFiles(filename, BaseTemplate),
+	)
 }
 
 func main() {
@@ -31,7 +47,7 @@ func main() {
 	r.Get("/", HandleIndex)
 
 	r.Get("/projects", func(w http.ResponseWriter, r *http.Request) {
-		RenderTemplate(w, r, "templates/pages/projects.html", nil)
+		RenderTemplate(w, r, ProjectsPage, nil)
 	})
 
 	r.Get("/static/*", func(w http.ResponseWriter, r *http.Request) {
@@ -70,16 +86,23 @@ func HandleIndex(w http.ResponseWriter, r *http.Request) {
 	// args
 	args := indexArgs{Greeting: greeting}
 
-	RenderTemplate(w, r, "templates/pages/index.html", args)
+	RenderTemplate(w, r, IndexPage, args)
 }
 
 // helper function to render the template for any page
 func RenderTemplate(w http.ResponseWriter, r *http.Request, filename string, data any) {
-	tmpl := template.Must(
-		template.New(filepath.Base(BASE_TEMPLATE)).Funcs(templateFuncs).ParseFiles(filename, BASE_TEMPLATE),
-	)
+	tmpl, ok := templates[filename]
+	if !ok {
+		log.Printf("no template parsed for %s", filename)
+		http.Error(w, "internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	// render into a buffer first so a half-written page never reaches the client
 	var buf bytes.Buffer
 	if err := tmpl.ExecuteTemplate(&buf, "base", data); err != nil {
+		log.Printf("rendering %s: %v", filename, err)
+		http.Error(w, "internal server error", http.StatusInternalServerError)
 		return
 	}
 
