@@ -1,0 +1,99 @@
+# robots.txt for drewboram.com
+
+# Default: the site is open to everyone, including search engines.
+User-agent: *
+Allow: /
+
+# ---------------------------------------------------------------------------
+# AI training crawlers - opted out.
+# These collect content to train models. Blocking them does not affect
+# ranking or indexing in Google, Bing, Apple, or DuckDuckGo search.
+# ---------------------------------------------------------------------------
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: PanguBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+# ---------------------------------------------------------------------------
+# AI *search* crawlers
+# ---------------------------------------------------------------------------
+
+# User-agent: OAI-SearchBot
+# Disallow: /
+#
+# User-agent: ChatGPT-User
+# Disallow: /
+#
+# User-agent: Claude-SearchBot
+# Disallow: /
+#
+# User-agent: Claude-User
+# Disallow: /
+#
+# User-agent: PerplexityBot
+# Disallow: /
+#
+# User-agent: Perplexity-User
+# Disallow: /
+#
+# User-agent: DuckAssistBot
+# Disallow: /
+#
+# User-agent: YouBot
+# Disallow: /

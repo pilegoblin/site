@@ -1,0 +1,4 @@
+Contact: https://github.com/pilegoblin
+Expires: 2027-08-18T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://drewboram.com/.well-known/security.txt

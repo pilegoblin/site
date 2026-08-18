@@ -43,6 +43,12 @@ func main() {
 	fs := http.FileServer(http.Dir("./public/"))
 	r.Handle("/public/*", http.StripPrefix("/public/", fs))
 
+	// RFC 9116 vulnerability disclosure endpoint, served from public/.well-known/
+	r.Handle("/.well-known/*", fs)
+
+	// crawler directives, served from public/robots.txt
+	r.Handle("/robots.txt", fs)
+
 	port, ok := os.LookupEnv("PORT")
 	if !ok {
 		port = "8080"
